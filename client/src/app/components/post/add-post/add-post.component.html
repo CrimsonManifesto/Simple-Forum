@@ -1,0 +1,19 @@
+<h2>Thêm bài viết mới</h2>
+<form (ngSubmit)="createPost()" class="bg-white">
+  <label for="title">Tiêu đề:</label>
+  <input id="title" [(ngModel)]="post.title" name="title" required />
+
+  <label for="content">Content:</label>
+  <div>
+  <textarea
+    id="content"
+    [(ngModel)]="post.content"
+    name="content"
+    rows="5"
+    required
+  ></textarea>
+  <input id="likes" [(ngModel)]="post.likes" name="likes" />
+
+</div>
+  <button type="submit">Post</button>
+</form>
