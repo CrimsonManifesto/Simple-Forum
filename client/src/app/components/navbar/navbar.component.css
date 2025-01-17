@@ -23,10 +23,30 @@
   box-shadow: inset 0 0 0 1px #fff;
 }
 
-.navbar-dark .navbar-nav .nav-link {
+.navbar-dark .navbar-nav {
   color: #fff;
-  background-color: #fff;
+  background-color: #dfe0e2;
   height: 46px;
+
+}
+
+.nav-link{
+  padding-inline: 15px !important;
+}
+
+.nav-block-other{
+  background-color: #183254 !important;
+}
+
+.nav-link-current {
+  color: #183254 !important;
+  font-weight: bold;
+
+}
+
+.nav-link-other {
+  color: #82a6d3 !important;
+  font-weight: bold;
 
 }
 

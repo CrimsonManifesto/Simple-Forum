@@ -6,6 +6,38 @@
   margin-bottom: 20px;
   color:#23497b
 }
+
+.category-header-block {
+  border-bottom: solid 0.5px grey;
+
+}
+
+.node-block{
+  background-color:#eaebec;
+}
+
+.thread-item{
+  border-bottom: solid 0.5px grey;
+}
+
 .thread-title{
   color:#23497b
+}
+
+.thread-content{
+  color:#23497b;
+  white-space: nowrap;           
+  overflow: hidden;             
+  text-overflow: ellipsis; 
+}
+
+.avatar{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.username{
+  white-space: nowrap;
 }

@@ -1,5 +1,7 @@
 const Category = require('../models/Category');
-
+const ThreadModel = require('../models/Thread');
+const PostModel = require('../models/Post');
+const CommentModel = require('../models/Comment');
 // CREATE
 
 exports.createCategory = async (req, res) => {
@@ -17,16 +19,54 @@ exports.createCategory = async (req, res) => {
 
 exports.getCategoriesWithThreads = async (req, res) => {
     try {
-        const categoriesWithThreads = await Category.find()
+        const categories = await Category.find()
             .populate({
                 path: 'threads',
-                select: 'title description createdAt status' 
-            })
-            .sort({ createdAt: -1 });   
+                select: 'title',
+            });
 
-        res.status(200).json(categoriesWithThreads);
+        const enrichedCategories = await Promise.all(
+            categories.map(async (category) => {
+                const threadsWithLatest = await Promise.all(
+                    category.threads.map(async (thread) => {
+                        const latestPost = await PostModel.findOne({ threadId: thread._id })
+                            .sort({ createdAt: -1 })
+                            .populate({
+                                path: 'userId',
+                                select: 'username avatar',
+                            });
+
+                        const latestComment = latestPost
+                            ? await CommentModel.findOne({ postId: latestPost._id })
+                                .sort({ createdAt: -1 })
+                                .populate({
+                                    path: 'userId',
+                                    select: 'username avatar',
+                                })
+                            : null;
+
+                        return {
+                            ...thread.toObject(),
+                            latestPost: latestPost
+                                ? {
+                                      ...latestPost.toObject(),
+                                      latestComment: latestComment || null,
+                                  }
+                                : null,
+                        };
+                    })
+                );
+
+                return {
+                    ...category.toObject(),
+                    threads: threadsWithLatest,
+                };
+            })
+        );
+
+        res.status(200).json(enrichedCategories);
     } catch (error) {
-        console.error('Error fetching categories with threads:', error);
+        console.error('Error fetching categories with latest posts/comments:', error);
         res.status(500).json({ error: 'Internal Server Error', details: error.message });
     }
 };

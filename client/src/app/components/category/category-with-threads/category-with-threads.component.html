@@ -1,8 +1,55 @@
-<div *ngFor="let category of categoriesWithThreads" class="bg-white mt-3">
-  <h3 class="category-title px-2 pt-2">{{ category.name }}</h3>
-  <ul>
-    <h5 *ngFor="let thread of category.threads" class="thread-title">
-      {{ thread.title }}
-    </h5>
-  </ul>
+<div class="row">
+  <div class="col-9 px-0">
+    <div *ngFor="let category of categoriesWithThreads" class="bg-white mt-0 mb-0">
+      <div class="category-header-block">
+        <h3 class="category-title px-3 py-1 mt-3 mb-0">{{ category.name }}</h3>
+      </div>
+      <ul class="node-block pb-0 pt-0 mb-0 mt-0 px-0">
+        <div *ngFor="let thread of category.threads" class="">
+          <div class="thread-item row px-0 mx-0">
+            <div class="node-main col-8 align-self-center">
+              <h5 class="thread-title">{{ thread.title }}</h5>
+            </div>
+
+            <div class="node-sub col-4 row">
+              <div class="col-4 align-self-center">
+                <!--Avatar-->
+                <div *ngIf="!thread.latestPost?.latestComment?.userId" class="no-post">
+                  <img src="{{ thread.latestPost?.userId?.avatar }}" alt="avt-img" class="avatar">
+                </div>
+                <div *ngIf="thread.latestPost?.latestComment?.userId" class="post-item">
+                  <img src="{{ thread.latestPost.latestComment.userId?.avatar }}" alt="avt-img" class="avatar">
+                </div>
+              </div>
+              <div class="col-8 align-self-center">
+
+                <p class="thread-content p-0 m-0">{{ thread.latestPost?.content }}</p>
+                <p *ngIf="!thread.latestPost" class="username p-0 m-0">{{thread.latestPost?.userId?.username}}</p>
+                <p class="username p-0 m-0">{{thread.latestPost?.latestComment?.userId?.username}}</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </ul>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="bg-white mt-1">
+      <div>
+        <h2>Trending conents</h2>
+      </div>
+      <div>
+        contents
+      </div>
+    </div>
+    <div class="bg-white mt-1">
+      <div>
+        <h2>Latest posts</h2>
+      </div>
+      <div>
+        <p>posts</p>
+      </div>
+    </div>
+  </div>
 </div>

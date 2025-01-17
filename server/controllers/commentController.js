@@ -8,7 +8,8 @@ exports.createComment = async (req, res) => {
         await comment.save();
         res.status(201).json(comment);
     } catch (error) {
-        res.status(501).json({ error: 'Error in CREATE comment' });
+        console.error('Error in CREATE comment:', error);
+        res.status(500).json({ error: 'Internal Server Error', details: error.message });
     }
 };
 
