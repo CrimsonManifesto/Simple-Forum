@@ -22,7 +22,6 @@ export class AddPostComponent {
 
   constructor(private postService: PostService, private router: Router) {}
 
-  // Hàm tạo bài viết
   createPost() {
     if (this.post.title && this.post.content) {
       this.postService.createPost(this.post).subscribe(

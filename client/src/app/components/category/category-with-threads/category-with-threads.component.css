@@ -1,0 +1,11 @@
+:host {
+  display: block;
+}
+.category-title {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color:#23497b
+}
+.thread-title{
+  color:#23497b
+}

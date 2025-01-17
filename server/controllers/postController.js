@@ -8,7 +8,8 @@ exports.createPost = async (req, res) => {
         await post.save();
         res.status(201).json(post);
     } catch (error) {
-        res.status(501).json({ error: 'Error in CREATE post' });
+        console.error('Error in CREATE post:', error); 
+        res.status(500).json({ error: 'Internal Server Error', details: error.message });
     }
 };
 
@@ -19,7 +20,8 @@ exports.getAllPosts = async (req, res) => {
         const posts = await Post.find();
         res.status(200).json(posts);
     } catch (error) {
-        res.status(500).json({ error: 'Error in GET post' });
+        console.error('Error in UPDATE post:', error); 
+        res.status(500).json({ error: 'Internal Server Error', details: error.message });
     }
 };
 

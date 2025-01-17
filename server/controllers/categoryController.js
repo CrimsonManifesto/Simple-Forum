@@ -5,24 +5,31 @@ const Category = require('../models/Category');
 exports.createCategory = async (req, res) => {
     try {
         const category = new Category(req.body);
-        await post.save();
+        await category.save();
         res.status(201).json(category);
     } catch (error) {
-        res.status(501).json({ error: 'Error in CREATE category' });
+        console.error('Error in CREATE category:', error);
+        res.status(500).json({ error: 'Internal Server Error', details: error.message });
     }
 };
 
 // READ
 
-exports.getAllCategories = async (req, res) => {
+exports.getCategoriesWithThreads = async (req, res) => {
     try {
-        const categories = await Category.find();
-        res.status(200).json(categories);
+        const categoriesWithThreads = await Category.find()
+            .populate({
+                path: 'threads',
+                select: 'title description createdAt status' 
+            })
+            .sort({ createdAt: -1 });   
+
+        res.status(200).json(categoriesWithThreads);
     } catch (error) {
-        res.status(500).json({ error: 'Error in GET category' });
+        console.error('Error fetching categories with threads:', error);
+        res.status(500).json({ error: 'Internal Server Error', details: error.message });
     }
 };
-
 // UPDATE
 
 

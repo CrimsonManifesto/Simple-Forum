@@ -8,8 +8,8 @@ exports.createUser = async (req, res) => {
         await user.save();
         res.status(201).json(user);
     } catch (error) {
-        res.status(501).json({ error: 'Error in CREATE user' });
-    }
+        console.error('Error in CREATE user:', error); 
+        res.status(500).json({ error: 'Internal Server Error', details: error.message });    }
 };
 
 // READ

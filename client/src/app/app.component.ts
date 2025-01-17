@@ -8,7 +8,13 @@ import {SectionLinkComponent} from './components/section-link/section-link.compo
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FooterComponent, NavbarComponent, HeaderComponent, SectionLinkComponent],
+  imports: [
+    RouterOutlet, 
+    FooterComponent, 
+    NavbarComponent, 
+    HeaderComponent, 
+    SectionLinkComponent
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

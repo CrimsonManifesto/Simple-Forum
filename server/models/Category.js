@@ -1,7 +1,4 @@
-const {
-    Schema,
-    model
-} = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 const CategorySchema = new Schema({
     name: {
@@ -19,13 +16,17 @@ const CategorySchema = new Schema({
         ref: 'Category',
         default: null
     },
+    threads: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Thread'
+        }
+    ],
     createdAt: {
         type: Date,
         default: Date.now
     }
 });
 
-
-const CategoryModel = model("Category", CategorySchema)
-
-module.exports = CategoryModel
+const CategoryModel = model("Category", CategorySchema);
+module.exports = CategoryModel;

@@ -1,0 +1,8 @@
+<div *ngFor="let category of categoriesWithThreads" class="bg-white mt-3">
+  <h3 class="category-title px-2 pt-2">{{ category.name }}</h3>
+  <ul>
+    <h5 *ngFor="let thread of category.threads" class="thread-title">
+      {{ thread.title }}
+    </h5>
+  </ul>
+</div>

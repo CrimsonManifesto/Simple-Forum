@@ -20,8 +20,8 @@ app.use(express.json());
 
 // Routes usage
 app.use('/posts', postRouter);
-app.use('/categories', categoryRouter);
 app.use('/threads', threadRouter);
+app.use('/categories', categoryRouter);
 app.use('/users', userRouter);
 app.use('/comments', commentRouter);
 app.use('/notifications', notificationRouter);
