@@ -7,11 +7,14 @@
   margin-bottom: 20px;
   color: #23497b;
   font-size: 25px;
+
 }
 
 .category-header-block {
   border-bottom: solid 2px #d1d2d3;
   background: linear-gradient(to bottom, white, #eff4fb);
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
 
 }
 
@@ -40,7 +43,7 @@
   color: #23497b;
   font-weight: 700;
   font-size: 18px;
-  ;
+  text-decoration: none;
 }
 
 .right-panel {

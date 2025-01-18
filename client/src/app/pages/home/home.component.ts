@@ -6,7 +6,7 @@ import { CategoryWithThreadsComponent } from '../../components/category/category
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { DatePipe, NgForOf, NgIf } from '@angular/common';
 import { CategoryService } from '../../services/post/category.service';
-
+import { removeVietnameseTones } from '../../utils/refactor-url';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -18,14 +18,20 @@ import { CategoryService } from '../../services/post/category.service';
     CategoryWithThreadsComponent,
     NgForOf, 
     DatePipe, 
-    NgIf
+    NgIf,
+    
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
   title = 'Home';
-  categoriesWithThreads: any[] = [];
+  categoriesWithThreads: any[] = [];  
+
+  encodeTitle(title: string | undefined): string {
+    const titleWithoutAccents = removeVietnameseTones(title || '');
+    return titleWithoutAccents;
+  }
 
   constructor(private categoryService: CategoryService) {}
 
