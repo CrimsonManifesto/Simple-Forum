@@ -11,11 +11,6 @@ const CategorySchema = new Schema({
         type: String,
         default: ''
     },
-    parentId: {
-        type: Schema.Types.ObjectId,
-        ref: 'Category',
-        default: null
-    },
     threads: [
         {
             type: Schema.Types.ObjectId,

@@ -1,4 +1,5 @@
 const Post = require('../models/Post');
+const Comment = require('../models/Comment');
 
 // CREATE
 
@@ -18,7 +19,18 @@ exports.createPost = async (req, res) => {
 exports.getAllPosts = async (req, res) => {
     try {
         const posts = await Post.find();
-        res.status(200).json(posts);
+
+        const enrichedPosts = await Promise.all(
+            posts.map(async (post) => {
+                const replyList = await Comment.find({postId : post._id});
+                return {
+                    ...post.toObject(),
+                    replyList
+                }
+
+    })
+        )
+        res.status(200).json(enrichedPosts);
     } catch (error) {
         console.error('Error in UPDATE post:', error); 
         res.status(500).json({ error: 'Internal Server Error', details: error.message });

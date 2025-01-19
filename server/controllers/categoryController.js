@@ -29,6 +29,9 @@ exports.getCategoriesWithThreads = async (req, res) => {
             categories.map(async (category) => {
                 const threadsWithLatest = await Promise.all(
                     category.threads.map(async (thread) => {
+
+                        const replyNumber = await PostModel.countDocuments({ threadId: thread._id });
+
                         const latestPost = await PostModel.findOne({ threadId: thread._id })
                             .sort({ createdAt: -1 })
                             .populate({
@@ -47,11 +50,13 @@ exports.getCategoriesWithThreads = async (req, res) => {
 
                         return {
                             ...thread.toObject(),
+                            replyNumber: replyNumber,
                             latestPost: latestPost
                                 ? {
-                                      ...latestPost.toObject(),
-                                      latestComment: latestComment || null,
-                                  }
+                                    ...latestPost.toObject(),
+                                    replyNumber: replyNumber,
+                                    latestComment: latestComment || null,
+                                }
                                 : null,
                         };
                     })
@@ -61,7 +66,9 @@ exports.getCategoriesWithThreads = async (req, res) => {
                     ...category.toObject(),
                     threads: threadsWithLatest,
                 };
-            })
+            }
+
+            )
         );
 
         res.status(200).json(enrichedCategories);
