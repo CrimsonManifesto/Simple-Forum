@@ -47,43 +47,38 @@ exports.getAllThreads = async (req, res) => {
 
         const enrichedThreads = await Promise.all(
             threads.map(async (thread) => {
-                
+
                 const replyNumber = await PostModel.countDocuments({ threadId: thread._id });
 
                 const postList = await PostModel.find({ threadId: thread._id })
-
-                const latestPost = await PostModel
-                    .findOne({ threadId: thread._id })
-                    .sort({ createdAt: -1 })
+                    .select('content userId createdAt')
                     .populate({
                         path: 'userId',
                         select: 'username avatar',
-                    });
-                const latestComment = latestPost
-                    ? await CommentModel.findOne({
-                        postId: latestPost._id
                     })
-                        .sort({ createdAt: -1 })
-                        .populate({
-                            path: 'userId',
-                            select: 'username avatar',
-                        })
-                    : null
+
+                const enrichedPosts = await Promise.all(
+                    postList.map(async (post) => {
+                        const latestComment = await CommentModel
+                            .findOne({ postId: post._id })
+                            .sort({ createdAt: -1 })
+                            .populate({
+                                path: 'userId',
+                                select: 'username avatar',
+                            });
+                        return {
+                            ...post.toObject(),
+                            latestComment: latestComment || null,
+                        };
+                    })
+                );
                 return {
                     ...thread.toObject(),
                     replyNumber: replyNumber,
-                    postList: postList,
-                    latestPost: latestPost
-                        ? {
-                            ...latestPost.toObject(),
-                            
-                            latestComment: latestComment || null,
-                        }
-                        : null,
-                }
-            }
-            )
-        )
+                    postList: enrichedPosts,
+                };
+            })
+        );
         res.status(200).json(enrichedThreads);
     } catch (error) {
         res.status(500).json({ error: "Error in GET Thread" });

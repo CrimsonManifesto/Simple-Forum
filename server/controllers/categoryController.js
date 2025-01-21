@@ -34,6 +34,7 @@ exports.getCategoriesWithThreads = async (req, res) => {
 
                         const latestPost = await PostModel.findOne({ threadId: thread._id })
                             .sort({ createdAt: -1 })
+                            .select('content createdAt')
                             .populate({
                                 path: 'userId',
                                 select: 'username avatar',
