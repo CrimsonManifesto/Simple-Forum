@@ -1,3 +1,79 @@
 :host {
   display: block;
 }
+
+.category-title {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #23497b;
+  font-size: 25px;
+
+}
+
+.category-header-block {
+  border-bottom: solid 2px #d1d2d3;
+  background: linear-gradient(to bottom, white, #eff4fb);
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+
+}
+
+.node-block {
+  background-color: #eaebec;
+}
+
+.node-icon {
+  padding-right: 0;
+  width: 65px;
+}
+
+.node-main {
+  padding-left: 0px;
+}
+
+.node-sub {
+  margin-left: 15px !important;
+}
+
+.thread-item {
+  border-bottom: solid 2px #d1d2d3;
+}
+
+.thread-title {
+  color: #23497b;
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.thread-title:hover {
+  color: #fb7821;
+  text-decoration: underline;
+}
+
+
+.right-panel {
+  padding-right: 0;
+}
+
+.thread-content {
+  color: #23497b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.username {
+  white-space: nowrap;
+}
+
+.grey-text{
+  color: grey;
+}

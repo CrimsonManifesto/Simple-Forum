@@ -30,7 +30,16 @@ exports.getCategoriesWithThreads = async (req, res) => {
                 const threadsWithLatest = await Promise.all(
                     category.threads.map(async (thread) => {
 
-                        const replyNumber = await PostModel.countDocuments({ threadId: thread._id });
+                        const postNumber = await PostModel.countDocuments({ threadId: thread._id });
+
+
+                        const replyList = await PostModel.find({ threadId: thread._id })
+
+                        const replyNumber = replyList.length > 0
+                            ? await CommentModel.countDocuments({ postId: { $in: replyList.map(reply => reply._id) } })
+                            : 0;
+
+                        const messageNumber = postNumber + replyNumber;
 
                         const latestPost = await PostModel.findOne({ threadId: thread._id })
                             .sort({ createdAt: -1 })
@@ -51,11 +60,11 @@ exports.getCategoriesWithThreads = async (req, res) => {
 
                         return {
                             ...thread.toObject(),
-                            replyNumber: replyNumber,
+                            postNumber: postNumber,
+                            messageNumber: messageNumber,
                             latestPost: latestPost
                                 ? {
                                     ...latestPost.toObject(),
-                                    replyNumber: replyNumber,
                                     latestComment: latestComment || null,
                                 }
                                 : null,

@@ -1,1 +1,69 @@
-<p>thread works!</p>
+<div class="container-xxl">
+    <div class="row">
+        <div class="col-12 col-lg-9 px-0">
+            <div class="category-container mt-0 mb-0">
+                <div class="category-header-block">
+                    <h3 class="category-title px-2 py-2 mt-3 mb-0">Post</h3>
+                </div>
+                <ul *ngFor="let post of filteredPosts" class="node-block mb-0 mt-0 px-0 py-0 align-items-center">
+                    <div class="thread-item row px-0 mx-0 align-items-center py-3">
+                        <div class="node-icon col-1 align-self-center">
+                            <img [src]="post.userId.avatar" alt="avt-img" class="avatar">
+                        </div>
+                        <div class="node-main col-7 align-self-center">
+                            <a [routerLink]="['/', 'p', encodeTitle(post.content) + post._id]" class="thread-title">
+                                {{ post.content }}
+                            </a>
+                            <div>
+                                <p class="p-0 m-0">
+                                    <span class="grey-text">
+                                        {{post.userId.username}} ·
+                                    </span>
+                                     {{ formatDate(post.createdAt) }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="node-sub col-4 row px-0 justify-content-end align-items-center">
+                            <div class="col-8 justify-content-end px-0">
+                                <p class="thread-content text-end justify-self-end p-0 m-0">
+                                    {{ post.latestComment ? formatDate(post.latestComment?.createdAt) :
+                                    formatDate(post.createdAt) }}
+                                </p>
+                                <p class="username text-end p-0 m-0">
+                                    {{ post.latestComment?.userId?.username || post.userId?.username }}
+                                </p>
+                            </div>
+                            <!--Avatar-->
+                            <div class="col-3 align-self-center p-0 px-2 d-flex justify-content-center">
+                                <div *ngIf="post.latestComment?.userId; else noAvatar">
+                                    <img [src]="post.latestComment.userId.avatar" alt="avt-img" class="avatar">
+                                </div>
+                                <ng-template #noAvatar>
+                                    <img [src]="post.userId.avatar" alt="avt-img" class="avatar">
+                                </ng-template>
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+        <div class="col-3 right-panel d-none d-lg-block">
+            <div class="bg-white mt-1">
+                <div class="mt-3">
+                    <h2>Trending contents</h2>
+                </div>
+                <div>
+                    contents
+                </div>
+            </div>
+            <div class="bg-white mt-1">
+                <div class="mt-3">
+                    <h2>Latest posts</h2>
+                </div>
+                <div>
+                    <p>posts</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -7,7 +7,8 @@
         </div>
         <ul class="node-block mb-0 mt-0 px-0 py-0 align-items-center">
           <div *ngFor="let thread of category.threads" class=" ">
-            <div class="thread-item row px-0 mx-0 align-items-center py-3">
+            <div class="thread-item row p-0 m-0 align-items-center py-3">
+
               <div class="node-icon col-1 align-self-center">
                 <svg id="comments" viewBox="0 0 576 512" width="40px" height="40px">
                   <path
@@ -15,14 +16,23 @@
                     fill="#ffba8c"></path>
                 </svg>
               </div>
-              <div class="node-main col-7 align-self-center">
+              <div class="node-main col-6 align-self-center m-0 p-0">
                 <a [routerLink]="['/thread', encodeTitle(thread.title)]" class="thread-title">
                   {{ thread.title }}
                 </a>
               </div>
-
-              <div class="node-sub col-4 row px-0">
-                <div class="col-4 align-self-center p-0 d-flex justify-content-end">
+              <div class="node-sub stat-node col-3 p-0 m-0 row align-self-center">
+                <div class="stat-col col p-0 m-0">
+                  <p class="grey-text stat p-0 m-0 text-center">Threads</p>
+                  <p class="thread-count p-0 m-0 text-center">{{ thread.postNumber }}</p>
+                </div>
+                <div class="stat-col col p-0 m-0">
+                  <p class="grey-text stat p-0 m-0 text-center">Messages</p>
+                  <p class="thread-count p-0 m-0 text-center">{{ thread.messageNumber }}</p>
+                </div>
+              </div>
+              <div class="node-sub preview-node col-3 row p-0 m-0 justify-content-end">
+                <div class="col-2 align-self-center p-0 d-flex justify-content-end">
                   <!--Avatar-->
                   <div *ngIf="!thread.latestPost?.latestComment?.userId" class="no-post">
                     <img src="{{ thread.latestPost?.userId?.avatar }}" alt="avt-img" class="avatar">
@@ -31,11 +41,21 @@
                     <img src="{{ thread.latestPost.latestComment.userId?.avatar }}" alt="avt-img" class="avatar">
                   </div>
                 </div>
-                <div class="col-8 align-self-center px-0">
+                <div class="col-10 align-self-center px-0">
 
                   <p class="thread-content p-0 m-0">{{ thread.latestPost?.content }}</p>
-                  <p *ngIf="!thread.latestPost" class="username p-0 m-0">{{thread.latestPost?.userId?.username}}</p>
-                  <p class="username p-0 m-0">{{thread.latestPost?.latestComment?.userId?.username}}</p>
+                  <div class="d-flex justify-content-start gap-1">
+                    <p *ngIf="thread.latestPost.latestComment" class="grey-text p-0 m-0">
+                      {{formatDate(thread.latestPost.latestComment.createdAt)}} · </p>
+                    <p *ngIf="thread.latestPost.latestComment" class="username p-0 m-0">
+                      {{thread.latestPost?.latestComment?.userId?.username}}</p>
+                  </div>
+                  <div class="d-flex justify-content-start gap-1">
+                    <p *ngIf="!thread.latestPost.latestComment" class="grey-text p-0 m-0">
+                      {{formatDate(thread.latestPost.createdAt)}} ·</p>
+                    <p *ngIf="!thread.latestPost.latestComment" class="username p-0 m-0">
+                      {{thread.latestPost?.userId?.username}} </p>
+                  </div>
 
                 </div>
               </div>

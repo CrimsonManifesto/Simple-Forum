@@ -3,8 +3,8 @@ import { LoginButtonComponent } from './components/login-button';
 import { LogoutButtonComponent } from './components/logout-button';
 import { HomeComponent } from './pages/home/home.component';
 import { AddPostComponent } from './components/post/add-post/add-post.component';
-import { PostListComponent } from './components/post/post-list/post-list.component';
 import { ThreadComponent } from './pages/thread/thread.component';
+import { PostComponent } from './pages/post/post.component';
 
 export const routes: Routes = [
   {
@@ -25,12 +25,12 @@ export const routes: Routes = [
     component: AddPostComponent,
   },
   {
-    path: 'view-post',
-    component: PostListComponent,
-  },
-  {
     path: 'thread/:title',
     component: ThreadComponent, 
   },
+  {
+    path: 'p/:fullTitle',
+    component: PostComponent,
+  }
 
 ];

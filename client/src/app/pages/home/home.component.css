@@ -29,10 +29,22 @@
 
 .node-main {
   padding-left: 0px;
+  flex: 1 1 43%; 
+  max-width: 43%; 
 }
 
 .node-sub {
-  margin-left: 15px !important;
+
+}
+
+.stat-node {
+  flex: 1 1 18; 
+  max-width: 18%; 
+}
+
+.preview-node {
+  flex: 1 1 30%; 
+  max-width: 30%; 
 }
 
 .thread-item {
@@ -44,6 +56,11 @@
   font-weight: 700;
   font-size: 18px;
   text-decoration: none;
+}
+
+.thread-title:hover {
+  color: #fb7821;
+  text-decoration: underline;
 }
 
 .right-panel {
@@ -65,5 +82,12 @@
 }
 
 .username {
+  color: #23497b;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.grey-text{
+  color: grey;
 }
