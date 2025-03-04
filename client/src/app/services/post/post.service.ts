@@ -10,7 +10,7 @@ export class PostService {
 
   constructor(private http: HttpClient) {}
 
-  createPost(post: { title: string; content: string; likes: number }): Observable<any> {
+  createPost(post: { title: string; content: string; likes: number; dislikes: number }): Observable<any> {
     return this.http.post(this.apiUrl, post);
   }
 

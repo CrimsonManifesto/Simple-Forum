@@ -29,7 +29,7 @@ export const routes: Routes = [
     component: ThreadComponent, 
   },
   {
-    path: 'p/:fullTitle',
+    path: 'p/:title/:id',
     component: PostComponent,
   }
 

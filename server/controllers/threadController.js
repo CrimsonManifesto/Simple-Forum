@@ -7,19 +7,18 @@ const CommentModel = require('../models/Comment');
 
 exports.createThread = async (req, res) => {
     try {
-        const { title, description, userId, categoryId, status } = req.body;
+        const { title, description, categoryId, status } = req.body;
 
         if (!title || !userId || !categoryId) {
             return res.status(400).json({
                 error: "Bad Request",
-                details: "Missing required fields: title, userId, or categoryId",
+                details: "Missing required fields: title, or categoryId",
             });
         }
 
         const thread = new Thread({
             title,
             description,
-            userId,
             categoryId,
             status,
         });
@@ -51,7 +50,7 @@ exports.getAllThreads = async (req, res) => {
                 const replyNumber = await PostModel.countDocuments({ threadId: thread._id });
 
                 const postList = await PostModel.find({ threadId: thread._id })
-                    .select('content userId createdAt')
+                    .select('title content userId createdAt')
                     .populate({
                         path: 'userId',
                         select: 'username avatar',

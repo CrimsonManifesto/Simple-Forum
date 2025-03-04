@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { DatePipe, NgForOf, NgIf } from '@angular/common';
-import { CategoryService } from '../../../services/post/category.service';
+import { CategoryService } from '../../../services/category/category.service';
 
 @Component({
   selector: 'app-category-with-threads',

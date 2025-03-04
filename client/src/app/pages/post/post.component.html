@@ -1,1 +1,40 @@
-<p>post works!</p>,
+<div class="container-xxl">
+    <div class="row">
+      <!-- Main Content -->
+      <div class="col-12 col-lg-9 px-0">
+        <div>
+          <div class="bg-white p-4">
+            <h2>{{ filteredPost?.title }}</h2>
+            <p>{{ filteredPost?.content }}</p>
+            <p><strong>Likes:</strong> {{ filteredPost?.likes }}</p>
+          </div>
+  
+          <!-- Comments Section -->
+          <div class="bg-white mt-3 p-4">
+            <h3>Comments</h3>
+            <div *ngIf="filteredComments.length > 0">
+              <div *ngFor="let comment of filteredComments" class="comment-box mb-3 p-3 border rounded">
+                <p><strong>{{ comment.author }}</strong>: {{ comment.content }}</p>
+                <p class="text-muted small">{{ comment.date | date: 'short' }}</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+  
+      <!-- Right Sidebar -->
+      <div class="col-3 right-panel d-none d-lg-block">
+        <div class="bg-white mt-1 p-3">
+          <h2>Trending contents</h2>
+          <p>Contents</p>
+        </div>
+        <div class="bg-white mt-1 p-3">
+          <h2>Latest posts</h2>
+          <p>Posts</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  

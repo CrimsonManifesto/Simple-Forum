@@ -8,20 +8,15 @@ import { formatDate } from '../../utils/refactor-date';
 @Component({
   selector: 'app-thread',
   standalone: true,
-  imports: [
-    RouterLink,
-    NgIf,
-    NgForOf,
-    DatePipe,
-  ],
+  imports: [RouterLink, NgIf, NgForOf, DatePipe],
   templateUrl: './thread.component.html',
-  styleUrls: ['./thread.component.css'], 
+  styleUrls: ['./thread.component.css'],
   providers: [DatePipe],
 })
-export class ThreadComponent implements OnInit { 
+export class ThreadComponent implements OnInit {
   threadTitle: string = '';
   allThreads: any[] = [];
-  filteredPosts: any[] = [];
+  filteredThreads: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -29,14 +24,16 @@ export class ThreadComponent implements OnInit {
     private datePipe: DatePipe
   ) {}
 
-    encodeTitle(title: string | undefined): string {
-      const titleWithoutAccents = removeVietnameseTones(title || '');
-      return titleWithoutAccents;
-    }
+  // Encode title to remove accents
+  encodeTitle(title: string | undefined): string {
+    const titleWithoutAccents = removeVietnameseTones(title || '');
+    return titleWithoutAccents;
+  }
 
-    formatDate(dateString: string | Date): string {
-      return formatDate(dateString, this.datePipe);
-    }
+  // Format date imported from utils
+  formatDate(dateString: string | Date): string {
+    return formatDate(dateString, this.datePipe);
+  }
 
   ngOnInit(): void {
     const title = this.route.snapshot.paramMap.get('title');
@@ -44,14 +41,20 @@ export class ThreadComponent implements OnInit {
       this.threadTitle = title;
     }
 
+    // Get all threads
     this.threadService.getThreads().subscribe((data) => {
       this.allThreads = data;
 
-    const thread = this.allThreads.find(
-      (thread) => this.encodeTitle(thread.title) === this.threadTitle
-    );
-    this.filteredPosts = thread?.postList || [];
-    
-  });
+      // Filter posts by thread title
+      const thread = this.allThreads.find(
+        (thread) => this.encodeTitle(thread.title) === this.threadTitle
+      );
+      this.filteredThreads = thread?.postList || [];
+      console.log('Filtered Threads:', this.filteredThreads);
+
+      console.log('Expected Title:', this.threadTitle);
+      console.log('Title:', this.encodeTitle(thread.title));
+
+    });
   }
 }

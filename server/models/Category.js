@@ -17,6 +17,11 @@ const CategorySchema = new Schema({
             ref: 'Thread'
         }
     ],
+    type:{
+        type: String,
+        enum: ['normal', 'announcement'],
+        default: 'normal'
+    },
     createdAt: {
         type: Date,
         default: Date.now

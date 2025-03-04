@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PostService } from '../../../services/post.service';
+import { PostService } from '../../../services/post/post.service';
 import {FormsModule} from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -17,6 +17,7 @@ export class AddPostComponent {
     title: '',
     content: '',
     likes: 0,
+    dislikes: 0
   };
   successMessage = '';
 

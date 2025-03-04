@@ -13,11 +13,6 @@ const ThreadSchema = new Schema({
     type: String,
     default: ''
   },
-  userId: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
   categoryId: {
     type: Schema.Types.ObjectId,
     ref: 'Category',
@@ -27,6 +22,10 @@ const ThreadSchema = new Schema({
     type: String,
     enum: ['open', 'closed'],
     default: 'open'
+  },
+  type: {
+    type: String,
+    default: 'normal'
   },
   createdAt: {
     type: Date,

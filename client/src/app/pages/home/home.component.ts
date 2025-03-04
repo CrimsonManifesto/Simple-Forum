@@ -5,7 +5,7 @@ import { PostListComponent } from '../../components/post/post-list/post-list.com
 import { CategoryWithThreadsComponent } from '../../components/category/category-with-threads/category-with-threads.component';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { DatePipe, NgForOf, NgIf } from '@angular/common';
-import { CategoryService } from '../../services/post/category.service';
+import { CategoryService } from '../../services/category/category.service';
 import { removeVietnameseTones } from '../../utils/refactor-url';
 import { formatDate } from '../../utils/refactor-date';
 

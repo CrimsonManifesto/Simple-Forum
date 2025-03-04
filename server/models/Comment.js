@@ -4,6 +4,10 @@ const {
 } = require("mongoose");
 
 const CommentSchema = new Schema({
+  title: {
+    type: String,
+    required: true
+  },
   content: {
     type: String,
     required: true
@@ -22,10 +26,9 @@ const CommentSchema = new Schema({
     type: Number,
     default: 0
   },
-  status: {
-    type: String,
-    enum: ['visible', 'hidden'],
-    default: 'visible'
+  dislike:{
+    type: Number,
+    default: 0
   },
   createdAt: {
     type: Date,
