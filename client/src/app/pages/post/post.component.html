@@ -8,9 +8,35 @@
             <p>{{ filteredPost?.content }}</p>
             <p><strong>Likes:</strong> {{ filteredPost?.likes }}</p>
           </div>
+
+          <div class="container mt-4 p-3 bg-white">
+            <div class="card p-3">
+                <div class="d-flex">
+                    <img src="https://data.voz.vn/avatars/m/1669/1669030.jpg?1603441774" class="rounded-circle me-3" alt="Avatar">
+                    <div>
+                        <strong>maybexD</strong> <span class="text-muted">Senior Member</span>
+                        <div class="text-muted small">May 14, 2020</div>
+                    </div>
+                </div>
+                <hr>
+                <p class="mb-2">
+                    dasdsadsada
+                </p>
+                <div class="text-muted small">2 am and the rain is falling</div>
+                <a href="#" class="d-block text-decoration-none mt-2">Report</a>
+                <div class="bg-light p-2 mt-3 rounded">
+                    <span>🥰 ThangBem and justdreaming244</span>
+                </div>
+                <div class="mt-3">
+                    <button class="btn btn-outline-secondary btn-sm">👍 Ưng</button>
+                    <button class="btn btn-outline-secondary btn-sm">+ Quote</button>
+                    <button class="btn btn-outline-secondary btn-sm">Reply</button>
+                </div>
+            </div>
+        </div>
   
           <!-- Comments Section -->
-          <div class="bg-white mt-3 p-4">
+          <div class="container bg-white mt-3 p-3">
             <h3>Comments</h3>
             <div *ngIf="filteredComments.length > 0">
               <div *ngFor="let comment of filteredComments" class="comment-box mb-3 p-3 border rounded">
@@ -21,6 +47,16 @@
 
           </div>
         </div>
+
+        <div class="container bg-white mt-4">
+          <div class="p-3">
+            <!-- Other content -->
+        
+            <!-- Editor Container -->
+            <div id="editor" class="mt-3"></div>
+          </div>
+        </div>
+
 
       </div>
   

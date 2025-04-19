@@ -1,21 +1,22 @@
-import {ApplicationConfig, importProvidersFrom, provideZoneChangeDetection} from '@angular/core';
+import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
 import { provideAuth0 } from '@auth0/auth0-angular';
+
 import { routes } from './app.routes';
-import {HttpClientModule} from '@angular/common/http';
+import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes),
-    provideAuth0({
-      domain: 'dev-ujucu4328alcrthb.us.auth0.com',
-      clientId: 'SYvKw9lVlYRdOsmgyIgzsHI7LfrOz3cU',
-      authorizationParams: {
-        redirect_uri: window.location.origin
+  providers: [
+    // Fine‑tune change detection for performance
+    provideZoneChangeDetection({ eventCoalescing: true }),
 
-      }
+    // Router
+    provideRouter(routes),
 
-    }),
-    provideRouter(routes), // Cung cấp routes
-    importProvidersFrom(HttpClientModule), // Cung cấp HttpClient cho API
-  ]
+    // HTTP client (standalone)
+    provideHttpClient(),
+
+    // Auth0 integration, with secrets in environment.ts
+  ],
 };

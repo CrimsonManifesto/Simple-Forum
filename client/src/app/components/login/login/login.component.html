@@ -1,0 +1,8 @@
+<form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <input formControlName="email" type="email" placeholder="Email" />
+    <input formControlName="password" type="password" placeholder="Password" />
+    <button type="submit" [disabled]="loading">Login</button>
+  
+    <p *ngIf="error" class="error">{{ error }}</p>
+  </form>
+  

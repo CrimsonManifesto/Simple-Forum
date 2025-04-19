@@ -1,5 +1,11 @@
 {
   "devDependencies": {
-    "@angular-devkit/core": "^18.2.10"
+    "@angular-devkit/core": "^18.2.10",
+    "concurrently": "^9.1.2"
+  },
+  "scripts": {
+    "start": "concurrently \"npm run client\" \"npm run server\"",
+    "client": "cd client && ng serve",
+    "server": "cd server && node app.js"  
   }
 }
